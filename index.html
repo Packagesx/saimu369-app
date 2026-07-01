@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>สายมู 369 - บันทึกยอดขาย</title>
+
+  <!-- ตั้งชื่อ/ไอคอนตอนกด "เพิ่มไปหน้าจอหลัก" บนมือถือ -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="สายมู 369">
+  <meta name="theme-color" content="#3b2352">
+
+  <!-- ตัวเด้งไปหน้าฟอร์มจริงทันที (แก้ URL ด้านล่างทุกครั้งที่ Deploy เวอร์ชันใหม่) -->
+  <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycby6yKUG9FDf9r29OR0o7uWbsJrZ_jss9g4-Y2DEbQiuNCD7YZD5PGXDWfN1k_KrTlFd/exec">
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      background: radial-gradient(circle at 50% 35%, #4a2c66, #241536 75%);
+      font-family: 'Sarabun', 'Tahoma', sans-serif;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .splash { text-align: center; color: #f6e9c9; }
+    .splash img {
+      width: 96px; height: 96px; border-radius: 22px;
+      box-shadow: 0 6px 24px rgba(0,0,0,.35);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    .splash h1 { font-size: 17px; font-weight: 600; margin: 18px 0 6px; }
+    .splash p { font-size: 12.5px; color: #c9a34e; margin: 0; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.06); opacity: .85; }
+    }
+  </style>
+</head>
+<body>
+  <div class="splash">
+    <img src="icon-512.png" alt="สายมู 369">
+    <h1>🙏 สายมู 369 - บันทึกยอดขาย</h1>
+    <p>กำลังเปิดฟอร์ม...</p>
+  </div>
+
+  <script>
+    // fallback เผื่อเบราว์เซอร์ไม่รองรับ meta refresh
+    window.location.replace('https://script.google.com/macros/s/AKfycby6yKUG9FDf9r29OR0o7uWbsJrZ_jss9g4-Y2DEbQiuNCD7YZD5PGXDWfN1k_KrTlFd/exec');
+  </script>
+</body>
+</html>
