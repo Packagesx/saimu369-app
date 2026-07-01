@@ -15,8 +15,10 @@
   <meta name="apple-mobile-web-app-title" content="สายมู 369">
   <meta name="theme-color" content="#3b2352">
 
-  <!-- ตัวเด้งไปหน้าฟอร์มจริงทันที (แก้ URL ด้านล่างทุกครั้งที่ Deploy เวอร์ชันใหม่) -->
-  <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycby6yKUG9FDf9r29OR0o7uWbsJrZ_jss9g4-Y2DEbQiuNCD7YZD5PGXDWfN1k_KrTlFd/exec">
+  <!-- หมายเหตุ: ไม่ใช้ meta refresh อีกต่อไป เพราะมันเด้งเร็วเกินไปจนกดปุ่มแชร์เพื่อ "เพิ่มไปหน้าจอโฮม" ไม่ทัน
+       ตอนนี้ใช้ JS เช็คแทนว่าเปิดจากไอคอนหน้าจอโฮม (standalone) หรือเปิดจากเบราว์เซอร์ปกติ
+       - เปิดจากไอคอนหน้าจอโฮม -> เด้งเข้าฟอร์มทันที (ใช้งานจริงประจำวัน)
+       - เปิดจากเบราว์เซอร์ปกติ (ตอนกำลังเพิ่มไอคอน) -> ค้างอยู่หน้านี้ ไม่เด้งไปไหน แก้ URL ด้านล่างในสคริปต์ทุกครั้งที่ Deploy เวอร์ชันใหม่ -->
 
   <style>
     * { box-sizing: border-box; }
@@ -26,7 +28,7 @@
       font-family: 'Sarabun', 'Tahoma', sans-serif;
       display: flex; align-items: center; justify-content: center;
     }
-    .splash { text-align: center; color: #f6e9c9; }
+    .splash { text-align: center; color: #f6e9c9; padding: 0 24px; }
     .splash img {
       width: 96px; height: 96px; border-radius: 22px;
       box-shadow: 0 6px 24px rgba(0,0,0,.35);
@@ -38,18 +40,59 @@
       0%, 100% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.06); opacity: .85; }
     }
+    #manualArea { display: none; margin-top: 22px; }
+    #manualArea .hint {
+      font-size: 12px; color: #f6e9c9; opacity: .85; line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    #manualBtn {
+      display: inline-block;
+      background: linear-gradient(135deg, #f0d896, #c9a34e);
+      color: #241536; font-weight: 700; font-size: 14px;
+      padding: 12px 28px; border-radius: 999px; text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,.3);
+    }
   </style>
 </head>
 <body>
   <div class="splash">
     <img src="icon-512.png" alt="สายมู 369">
     <h1>🙏 สายมู 369 - บันทึกยอดขาย</h1>
-    <p>กำลังเปิดฟอร์ม...</p>
+    <p id="statusText">กำลังเปิดฟอร์ม...</p>
+
+    <div id="manualArea">
+      <p class="hint">
+        เปิดหน้านี้จากเบราว์เซอร์ปกติ — ถ้ายังไม่เคยเพิ่มไอคอนไว้ที่หน้าจอโฮม<br>
+        ให้กดปุ่มแชร์ (Share) แล้วเลือก "เพิ่มไปยังหน้าจอโฮม" ก่อน<br>
+        เพื่อให้ครั้งต่อไปกดไอคอนแล้วเข้าฟอร์มได้เลย
+      </p>
+      <a id="manualBtn" href="#">เข้าฟอร์มตอนนี้เลย</a>
+    </div>
   </div>
 
   <script>
-    // fallback เผื่อเบราว์เซอร์ไม่รองรับ meta refresh
-    window.location.replace('https://script.google.com/macros/s/AKfycby6yKUG9FDf9r29OR0o7uWbsJrZ_jss9g4-Y2DEbQiuNCD7YZD5PGXDWfN1k_KrTlFd/exec');
+    var FORM_URL = 'https://script.google.com/macros/s/AKfycby6yKUG9FDf9r29OR0o7uWbsJrZ_jss9g4-Y2DEbQiuNCD7YZD5PGXDWfN1k_KrTlFd/exec';
+
+    function isStandalone() {
+      return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches)
+        || window.navigator.standalone === true; // iOS Safari
+    }
+
+    document.getElementById('manualBtn').href = FORM_URL;
+    document.getElementById('manualBtn').onclick = function () {
+      window.location.href = FORM_URL;
+    };
+
+    if (isStandalone()) {
+      // เปิดจากไอคอนหน้าจอโฮม -> เด้งเข้าฟอร์มทันที
+      setTimeout(function () {
+        window.location.replace(FORM_URL);
+      }, 400);
+    } else {
+      // เปิดจากเบราว์เซอร์ปกติ -> ไม่เด้ง ให้เวลาเพิ่มไอคอนหน้าจอโฮม
+      document.getElementById('statusText').textContent = 'พร้อมใช้งาน';
+      document.getElementById('manualArea').style.display = 'block';
+    }
   </script>
 </body>
 </html>
